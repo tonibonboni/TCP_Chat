@@ -22,5 +22,5 @@ TcpClient(ServerIp, Port) - инициализира клас TcpClient като
 - Срок на домашната работа - 1 седмица
 
 # Препоръки
-- Използвайте за целта публичната документация. ([Пример тук] (https://learn.microsoft.com/en-us/dotnet/api/system.net.sockets.tcpclient.getstream?view=net-8.0&devlangs=csharp&f1url=%3FappId%3DDev17IDEF1%26l%3DEN-US%26k%3Dk(System.Net.Sockets.TcpClient.GetStream)%3Bk(DevLang-csharp)%26rd%3Dtrue))
+- Използвайте за целта публичната документация. [Пример тук](https://learn.microsoft.com/en-us/dotnet/api/system.net.sockets.tcpclient.getstream?view=net-8.0&devlangs=csharp&f1url=%3FappId%3DDev17IDEF1%26l%3DEN-US%26k%3Dk(System.Net.Sockets.TcpClient.GetStream)%3Bk(DevLang-csharp)%26rd%3Dtrue)
 - Най-лесния начин е да поставите курсора върху метода, който желаете да документирате и да натиснете F1. Браузъра ще се отвори директно на желаната документация.
