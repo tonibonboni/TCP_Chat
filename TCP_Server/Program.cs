@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -7,19 +7,19 @@ using System.Threading;
 
 class Server
 {
-    private static readonly List<TcpClient> clients = new List<TcpClient>();
-    private const int Port = 8888;
+    private static readonly List<TcpClient> clients = new List<TcpClient>(); // генерира се списък от клиенти
+    private const int Port = 8888; // задава се порт
 
     static void Main()
     {
-        TcpListener server = new TcpListener(IPAddress.Any, Port);
-        server.Start();
+        TcpListener server = new TcpListener(IPAddress.Any, Port); // генерира се сървър
+        server.Start(); // сървъра се стартира
         Console.WriteLine($"Server started on port {Port}");
 
         while (true)
         {
             TcpClient client = server.AcceptTcpClient();
-            clients.Add(client);
+            clients.Add(client); // клиента се добавя в списъка
             Thread clientThread = new Thread(HandleClient);
             clientThread.Start(client);
         }
@@ -27,17 +27,17 @@ class Server
 
     static void HandleClient(object obj)
     {
-        TcpClient tcpClient = (TcpClient)obj;
-        NetworkStream stream = tcpClient.GetStream();
+        TcpClient tcpClient = (TcpClient)obj; // създава се обект
+        NetworkStream stream = tcpClient.GetStream();// клиента става активен
 
-        byte[] buffer = new byte[1024];
-        int bytesRead;
+        byte[] buffer = new byte[1024]; // създава се масив 
+        int bytesRead; //инициализира се променлива
 
-        while (true)
+        while (true) 
         {
-            try
+            try // стартира се проверка
             {
-                bytesRead = stream.Read(buffer, 0, buffer.Length);
+                bytesRead = stream.Read(buffer, 0, buffer.Length); 
                 if (bytesRead == 0)
                 {
                     break;
@@ -48,13 +48,13 @@ class Server
 
                 BroadcastMessage(tcpClient, message);
             }
-            catch (Exception)
+            catch (Exception) // хвърля се изключение при неуспешно извършена проверка
             {
                 break;
             }
         }
 
-        clients.Remove(tcpClient);
+        clients.Remove(tcpClient); //клиента се премахва от списъка
         tcpClient.Close();
     }
 
@@ -62,11 +62,11 @@ class Server
     {
         byte[] broadcastBuffer = Encoding.ASCII.GetBytes(message);
 
-        foreach (TcpClient client in clients)
+        foreach (TcpClient client in clients) //за всеки клиент от списъка се извършва проверката
         {
-            if (client != sender)
+            if (client != sender) //проверява дали клиента изпраща или не
             {
-                NetworkStream stream = client.GetStream();
+                NetworkStream stream = client.GetStream(); 
                 stream.Write(broadcastBuffer, 0, broadcastBuffer.Length);
             }
         }
